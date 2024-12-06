@@ -10,7 +10,7 @@ import { z } from "zod";
 
 const prisma = new PrismaClient();
 
-const JWT_SECRET = process.env.JWT_SECRET || "secret-key-here";
+const JWT_SECRET = process.env.JWT_TOKEN || "secret-key-here";
 
 
 const signupSchema = z.object({
