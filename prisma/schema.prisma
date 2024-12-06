@@ -1,0 +1,52 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  bookings  Booking[]
+
+  @@map("users")
+}
+
+model Train {
+  id          Int      @id @default(autoincrement())
+  source      String
+  destination String
+  seats       Int
+  bookedSeats Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  bookings    Booking[]
+
+  @@map("trains")
+}
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  trainId   Int
+  bookedAt  DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Train     Train    @relation(fields: [trainId], references: [id], onDelete: Cascade)
+
+  @@map("bookings")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
