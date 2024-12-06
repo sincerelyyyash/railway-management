@@ -28,6 +28,8 @@ app.use(cookieParser())
 
 //Routes import 
 import userRouter from "./routes/user.routes";
+import trainRouter from "./routes/train.routes";
 
 app.use("/api/v1/user", userRouter);
+app.use("/api/v1/train", trainRouter);
 export { app }
