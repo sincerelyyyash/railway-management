@@ -109,12 +109,18 @@ export const signin = asyncHandler(async (req: Request, res: Response) => {
     expiresIn: "1h"
   });
 
+  res.cookie('token', token, {
+    httpOnly: true,
+    // secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 3600000
+  });
+
   const response = new ApiResponse({
     statusCode: 200,
     data: { token },
-    message: "Sign In successfull"
+    message: "Sign In successful"
   });
 
   return res.status(response.statusCode).json(response);
-
-})
+});

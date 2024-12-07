@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "watch": "tsc -w",
+    "dev": "concurrently \"npm run watch\" \"nodemon -r dotenv/config dist/index.js\"",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.0.1",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -27,6 +28,9 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cookie-parser": "^1.4.8",
     "@types/dotenv": "^8.2.3",
-    "@types/jsonwebtoken": "^9.0.7"
+    "@types/jsonwebtoken": "^9.0.7",
+    "concurrently": "^9.1.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0"
   }
 }
