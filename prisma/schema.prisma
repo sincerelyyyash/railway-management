@@ -49,4 +49,3 @@ enum UserRole {
   ADMIN
   USER
 }
-
